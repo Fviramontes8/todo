@@ -89,6 +89,11 @@ namespace fv_todo {
 			 */
 			unsigned int year() const;
 
+			/*
+			 * @brief Updates all attributes with the current timestamp
+			 */
+			void update();
+
 			friend std::ostream& operator<<(std::ostream& out, const Date& d);
 	};
 }
