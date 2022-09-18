@@ -1,8 +1,7 @@
 #include <iostream>
 
-#include "../include/todo_app/uid_generator.hpp"
-#include "../include/todo_app/date.hpp"
 #include "../include/todo_app/todo_item.hpp"
+#include "../include/todo_app/sqlite_database.hpp"
 
 int main() {
 	fv_todo::Date today;
@@ -10,6 +9,8 @@ int main() {
 
 	fv_todo::ToDoItem init_task("Show this instance");
 	std::cout << init_task << '\n';
+
+	fv_todo::SQLiteDB db;
 
 	return 0;
 }
