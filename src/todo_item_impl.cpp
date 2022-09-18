@@ -34,6 +34,22 @@ namespace fv_todo {
 		_completed_at.update();
 	}
 
+	std::string ToDoItem::status_to_str() const {
+		std::string result_status;
+		switch (status()) {
+			case Status::IN_PROGRESS:
+				result_status = "In-progress";
+				break;
+			case Status::COMPLETE:
+				result_status = "Complete";
+				break;
+			default:
+				result_status = "In-progress";
+				break;
+		}
+		return result_status;
+	}
+
 	std::ostream& operator<<(std::ostream& out, const ToDoItem& tdi) {
 		out << "Task: " << tdi.title() << '\n' << "ID: " << tdi.uid() << '\n';
 		out << "Status: " << tdi.status_to_str() << "\nCreated: ";
