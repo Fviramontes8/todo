@@ -1,2 +1,5 @@
 # The build folder that is generated with cmake
 build/
+
+# Folder where the database will reside, it should be local to everyone
+db/
