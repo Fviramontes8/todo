@@ -1,6 +1,9 @@
 #ifndef FV_DATE
 #define FV_DATE
 
+#include <ctime>
+#include <ostream>
+
 namespace fv_todo {
 	class Date {
 		private:
@@ -25,8 +28,8 @@ namespace fv_todo {
 
 		public:
 			/*
-			 * @brief Unparameterized constructor which will set the date to
-			 * 	01/01/1970 or January 1st, 1970
+			 * @brief Unparameterized constructor which will get the current
+			 * 	timestamp and extracts the date from that information
 			 */
 			Date();
 
@@ -85,6 +88,8 @@ namespace fv_todo {
 			 * @return An unsigned int representing the year
 			 */
 			unsigned int year() const;
+
+			friend std::ostream& operator<<(std::ostream& out, const Date& d);
 	};
 }
 #endif // FV_DATE
