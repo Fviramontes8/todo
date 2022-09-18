@@ -1,5 +1,6 @@
 #include <random>
 #include <string>
+#include <sstream>
 
 #include "../include/todo_app/uid_generator.hpp"
 
@@ -9,10 +10,11 @@ namespace fv_todo {
 	static std::uniform_int_distribution<> distrib(0, 15);
 
 	std::string generate_uid() {
-		std::string uid{""};
+		std::stringstream int_hex_stream;
 		for (int i=0; i<16; ++i) {
-			uid += std::to_string(distrib(generator));
+			int generated_int = distrib(generator);
+			int_hex_stream << std::hex << generated_int;
 		}
-		return uid;
+		return int_hex_stream.str();
 	}
 }
