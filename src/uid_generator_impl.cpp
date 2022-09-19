@@ -9,12 +9,13 @@ namespace fv_todo {
 	static std::mt19937 generator(rand_dev());
 	static std::uniform_int_distribution<> distrib(0, 15);
 
-	std::string generate_uid() {
-		std::stringstream int_hex_stream;
+	unsigned long long generate_uid() {
+		unsigned long long uid = 0;
 		for (int i=0; i<16; ++i) {
 			int generated_int = distrib(generator);
-			int_hex_stream << std::hex << generated_int;
+			uid = uid | generated_int;
+			uid <<= 1;
 		}
-		return int_hex_stream.str();
+		return uid;
 	}
 }

@@ -17,7 +17,7 @@ namespace fv_todo {
 	
 	class ToDoItem {
 		private:
-			std::string _unique_id;
+			unsigned long long _unique_id;
 			std::string _title;
 			Date _created_at;
 			Date _completed_at;
@@ -37,7 +37,7 @@ namespace fv_todo {
 			 *
 			 * @return String containing pseudo-unique id
 			 */
-			std::string uid() const;
+			unsigned long long uid() const;
 
 			/*
 			 * @brief Getter for _title attribute

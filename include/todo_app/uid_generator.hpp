@@ -6,5 +6,5 @@ namespace fv_todo {
 	 * 
 	 * @return A string of random values
 	 */
- 	std::string generate_uid();
+ 	unsigned long long generate_uid();
 }

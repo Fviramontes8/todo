@@ -9,7 +9,7 @@ namespace fv_todo {
 		_unique_id = generate_uid();
 
 	}
-	std::string ToDoItem::uid() const {
+	unsigned long long ToDoItem::uid() const {
 		return _unique_id;
 	}
 
