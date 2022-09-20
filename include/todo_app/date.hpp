@@ -94,6 +94,11 @@ namespace fv_todo {
 			 */
 			void update();
 
+			/*
+			 * @brief Prints all the attributes of the class to
+			 * 	std::ostream, if the status is set to COMPLETE, it will show
+			 * 	the completed_at attribute, otherwise it is hidden
+			 */
 			friend std::ostream& operator<<(std::ostream& out, const Date& d);
 	};
 }
