@@ -53,8 +53,8 @@ namespace fv_todo {
 
 	std::string ToDoItem::to_db_str() const {
 		std::ostringstream db_str;
-		db_str << _unique_id << ',' << _title << ',' << _created_at;
-		db_str << ',' << _completed_at << ',' << status_to_str();
+		db_str << _unique_id << ",'" << _title << "','" << _created_at;
+		db_str << "','" << _completed_at << "','" << status_to_str() << "'";
 		return db_str.str();
 	}
 
