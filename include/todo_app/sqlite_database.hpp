@@ -64,13 +64,16 @@ namespace fv_todo {
 			 *
 			 * @param not_used From 
 			 * 	https://www.tutorialspoint.com/sqlite/sqlite_c_cpp.htm, it
-			 * 	holds the data provided by parameter az_col_name.
+			 * 	holds the data provided by parameter col_name.
 			 * @param argc The number of columns from a sql command.
 			 * @param argv The contents from each column from a sql command.
 			 * @param col_name The names of the columns.
 			 */
 			static int print_callback(void* not_used, 
-					int argc, char** argv, char** az_col_name);
+					int argc, char** argv, char** col_name);
+
+			static int todoitem_callback(void* not_used,
+					int argc, char** argv, char** col_name);
 
 		public:
 			SQLiteDB();
@@ -95,7 +98,16 @@ namespace fv_todo {
 			 * @param id The Pseudo unique id mostly likely given by some
 			 * 	tdi.uid() method call.
 			 */
-			void read_task(unsigned long long id);
+			void print_task(unsigned long long id);
+
+			/*
+			 * @brief Given a particular id, the method will search for that
+			 *  entry and return it as a ToDoItem class
+			 *
+			 * @param id The Pseudo unique id that will be searched in the
+			 * 	database
+			 */
+			ToDoItem read_task(unsigned long long id);
 
 			/*
 			 * @brief Given a particular id, the method will search for an

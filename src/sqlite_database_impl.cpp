@@ -19,12 +19,17 @@ namespace fv_todo {
 	}
 
 	int SQLiteDB::print_callback(void* not_used,
-			int argc, char** argv, char** az_col_name) {
+			int argc, char** argv, char** col_name) {
 		for (int i=0; i<argc; ++i) {
-			std::cout << az_col_name[i] << "\t";
+			std::cout << col_name[i] << "\t";
 			std::cout << (argv[i] ? argv[i] : "NULL") << '\n';
 		}
 		std::cout << '\n';
+		return 0;
+	}
+
+	int SQLiteDB::todoitem_callback(void* data,
+			int argc, char** argv, char** col_name) {
 		return 0;
 	}
 
@@ -114,7 +119,7 @@ namespace fv_todo {
 		execute_sql(sql_statement, print_callback);
 	}
 
-	void SQLiteDB::read_task(unsigned long long id) {
+	void SQLiteDB::print_task(unsigned long long id) {
 		std::string sql_begin = "SELECT * FROM TODO WHERE ID=";
 		std::string id_str = std::to_string(id);
 		execute_sql(
@@ -132,4 +137,3 @@ namespace fv_todo {
 		);
 	}
 }
-
