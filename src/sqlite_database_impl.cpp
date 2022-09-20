@@ -18,12 +18,13 @@ namespace fv_todo {
 		stop_db();
 	}
 
-	int SQLiteDB::callback(void* not_used,
-			int argc, char* argv[], char** az_col_name) {
+	int SQLiteDB::print_callback(void* not_used,
+			int argc, char** argv, char** az_col_name) {
 		for (int i=0; i<argc; ++i) {
-			printf("%s = %s\n", az_col_name[i], argv[i] ? argv[i] : "NULL");
+			std::cout << az_col_name[i] << "\t";
+			std::cout << (argv[i] ? argv[i] : "NULL") << '\n';
 		}
-		printf("\n");
+		std::cout << '\n';
 		return 0;
 	}
 
@@ -51,32 +52,15 @@ namespace fv_todo {
 	}
 
 	void SQLiteDB::create_todo_db() {
-		// Temporary placeholder incase KEY does not work
-		// "UID CHAR(16) NOT NULL,"
 		std::string sql_statement {
 			"CREATE TABLE TODO("
 			"ID INT PRIMARY KEY NOT NULL,"
 			"TITLE TEXT NOT NULL,"
-			"CREATED CHAR(10),"
-			"COMPLETED CHAR(10),"
-			"STATUS CHAR(11));"
+			"CREATED TEXT,"
+			"COMPLETED TEXT,"
+			"STATUS TEXT);"
 		};
-		char* z_err_msg = 0;
-		int conn_res = sqlite3_exec(
-			_database, 
-			sql_statement.c_str(),
-			callback, 
-			0, 
-			&z_err_msg
-		);
-		if (conn_res != SQLITE_OK) {
-			// std::cerr << z_err_msg << '\n';
-			write_to_db_log(std::string(z_err_msg));
-			sqlite3_free(z_err_msg);
-		}
-		else {
-			write_to_db_log("Created TODO table");
-		}
+		execute_sql(sql_statement, print_callback);
 	}
 
 	void SQLiteDB::write_to_db_log(std::string msg) {
@@ -93,30 +77,59 @@ namespace fv_todo {
 		log_file.close();
 	}
 
-	void SQLiteDB::add_task(const ToDoItem& tdi) {
-		std::string begin_sql =
-			"INSERT INTO TODO("
-			"KEY TITLE CREATED COMPLETED STATUS) "
-			"VALUES (";
-		std::string end_sql = ");";
-		std::string sql_statement = begin_sql+tdi.to_db_str()+end_sql;
-
-		char* z_err_msg = 0;
-		int conn_res = sqlite3_exec(
+	void SQLiteDB::execute_sql(
+			const std::string& sql_cmd,
+			int (*callback_fn) (void*, int, char**, char**)) {
+		char* z_err_msg = 0; int conn_res = sqlite3_exec(
 			_database, 
-			sql_statement.c_str(),
-			callback, 
+			sql_cmd.c_str(),
+			callback_fn, 
 			0, 
 			&z_err_msg
 		);
 		if (conn_res != SQLITE_OK) {
-			// std::cerr << z_err_msg << '\n';
 			write_to_db_log(std::string(z_err_msg));
 			sqlite3_free(z_err_msg);
 		}
 		else {
-			write_to_db_log("Wrote to TODO table");
+			write_to_db_log(
+					std::string("Successfully wrote: ") +
+					sql_cmd
+			);
 		}
+	}
+
+	void SQLiteDB::add_task(const ToDoItem& tdi) {
+		std::string begin_sql =
+			"INSERT INTO TODO("
+			"ID,TITLE,CREATED,COMPLETED,STATUS) "
+			"VALUES (";
+		std::string end_sql = ");";
+		std::string sql_statement = begin_sql+tdi.to_db_str()+end_sql;
+		execute_sql(sql_statement, print_callback);
+	}
+
+	void SQLiteDB::print_database() {
+		std::string sql_statement = "SELECT * FROM TODO";
+		execute_sql(sql_statement, print_callback);
+	}
+
+	void SQLiteDB::read_task(unsigned long long id) {
+		std::string sql_begin = "SELECT * FROM TODO WHERE ID=";
+		std::string id_str = std::to_string(id);
+		execute_sql(
+			std::string(sql_begin+id_str).c_str(),
+			print_callback
+		);
+	}
+
+	void SQLiteDB::delete_task(unsigned long long id) {
+		std::string sql_begin = "DELETE from TODO where ID=";
+		std::string id_str = std::to_string(id);
+		execute_sql(
+			std::string(sql_begin+id_str).c_str(),
+			print_callback
+		);
 	}
 }
 
