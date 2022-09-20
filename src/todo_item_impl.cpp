@@ -58,6 +58,28 @@ namespace fv_todo {
 		return db_str.str();
 	}
 
+	bool ToDoItem::operator==(const ToDoItem& other) {
+		return (_title == other._title) &&
+			(_created_at == other._created_at) &&
+			(_completed_at == other._completed_at);
+	}
+
+	bool ToDoItem::operator!=(const ToDoItem& other) {
+		return !(*this == other);
+	}
+
+	ToDoItem& ToDoItem::operator=(const ToDoItem& other) {
+		if (this == &other) { return *this; }
+
+		_unique_id = other._unique_id;
+		_title = other._title;
+		_created_at = other._created_at;
+		_completed_at = other._completed_at;
+		_task_status = other._task_status;
+
+		return *this;
+	}
+
 	std::ostream& operator<<(std::ostream& out, const ToDoItem& tdi) {
 		out << "Task: " << tdi.title() << '\n' << "ID: " << tdi.uid() << '\n';
 		out << "Status: " << tdi.status_to_str() << "\nCreated: ";

@@ -85,6 +85,37 @@ namespace fv_todo {
 			std::string to_db_str() const;
 
 			/*
+			 * @brief Compares all attributes of other with itself if they are
+			 *  the same
+			 *
+			 * @param other Other class to compare attributes with
+			 *
+			 * @return True if all attributes are the same, false otherwise.
+			 */
+			bool operator==(const ToDoItem& other);
+
+			/*
+			 * @brief Compares all attributes of other with itself if they are
+			 * 	not the same
+			 *
+			 * @param other Other class to compare attributes with
+			 *
+			 * @return True if all attributes are not the same, false 
+			 * 	otherwise.
+			 */
+			bool operator!=(const ToDoItem& other);
+
+			/*
+			 * @brief Assigns all attributes from other to the class itself
+			 *
+			 * @param other ToDoItem that will copy its attributes to the
+			 * 	class itself
+			 *
+			 * @return Updated attributes of the class calling the operator.
+			 */
+			ToDoItem& operator=(const ToDoItem& other);
+
+			/*
 			 * @brief Adds additional functionality to the << operator, so
 			 *  it can be printed with std::cout
 			 *
