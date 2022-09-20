@@ -9,7 +9,9 @@ namespace fv_todo {
 
 			void check_db_folder();
 			void start_db();
+			void stop_db();
 			void create_todo_db();
+			void write_to_db_log(std::string msg);
 
 			/*
 			 * @brief Required callback function needed to execute sql commands
