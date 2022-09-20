@@ -95,6 +95,25 @@ namespace fv_todo {
 		_day = local_time->tm_mday;
 	}
 
+	bool Date::operator==(const Date& other) {
+		return (_day == other._day) &&
+			(_month == other._month) &&
+			(_year == other._year);
+	}
+
+	bool Date::operator!=(const Date& other) {
+		return !(*this == other);
+	}
+
+	Date& Date::operator=(const Date& other) {
+		if (this == &other) { return *this; }
+		_day = other._day;
+		_month = other._month;
+		_year = other._year;
+
+		return *this;
+	}
+
 	std::ostream& operator<<(std::ostream& out, const Date& d) {
 		out << d.month() << '/' << d.day() << '/' << d.year();
 		return out;

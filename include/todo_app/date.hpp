@@ -95,6 +95,37 @@ namespace fv_todo {
 			void update();
 
 			/*
+			 * @brief Compares all attributes of the Date class if they are
+			 * 	all the same
+			 *
+			 * @param other Date class to be compared with.
+			 *
+			 * @return True if all attributes are the same, false otherwise.
+			 */
+			bool operator==(const Date& other);
+
+			/*
+			 * @brief Compares all attributes of the Date class if they are
+			 * 	not the same
+			 *
+			 * @param other Date class to be compared with.
+			 *
+			 * @return True if all attributes are not the same, false 
+			 * 	otherwise.
+			 */
+			bool operator!=(const Date& other);
+
+			/*
+			 * @brief Copies all attributes of other to the class calling the
+			 * 	operator overload method itself (aka this).
+			 *
+			 * @param other Class to assign to self (aka this).
+			 *
+			 * @return Updated this with the attributes of other.
+			 */
+			Date& operator=(const Date& other);
+
+			/*
 			 * @brief Prints all the attributes of the class to
 			 * 	std::ostream, if the status is set to COMPLETE, it will show
 			 * 	the completed_at attribute, otherwise it is hidden
