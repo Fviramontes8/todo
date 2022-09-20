@@ -2,13 +2,14 @@
 #include "../include/todo_app/uid_generator.hpp"
 
 #include <ostream>
+#include <sstream>
 
 namespace fv_todo {
 	ToDoItem::ToDoItem(std::string title) : _created_at(), _completed_at(),
 		_task_status{Status::IN_PROGRESS}, _title{title} {
 		_unique_id = generate_uid();
-
 	}
+
 	unsigned long long ToDoItem::uid() const {
 		return _unique_id;
 	}
@@ -48,6 +49,13 @@ namespace fv_todo {
 				break;
 		}
 		return result_status;
+	}
+
+	std::string ToDoItem::to_db_str() const {
+		std::ostringstream db_str;
+		db_str << _unique_id << ',' << _title << ',' << _created_at;
+		db_str << ',' << _completed_at << ',' << status_to_str();
+		return db_str.str();
 	}
 
 	std::ostream& operator<<(std::ostream& out, const ToDoItem& tdi) {

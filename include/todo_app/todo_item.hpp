@@ -77,6 +77,14 @@ namespace fv_todo {
 			std::string status_to_str() const;
 
 			/*
+			 * @brief converts all attributes to a sql compatible string,
+			 * 	namely having all attributes as comma separated values
+			 *
+			 * @return String of all attributes as comma separated values
+			 */
+			std::string to_db_str() const;
+
+			/*
 			 * @brief Adds additional functionality to the << operator, so
 			 *  it can be printed with std::cout
 			 *
