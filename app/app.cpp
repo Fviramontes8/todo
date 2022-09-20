@@ -11,6 +11,7 @@ int main() {
 	std::cout << init_task << '\n';
 
 	fv_todo::SQLiteDB db;
+	db.add_task(init_task);
 
 	return 0;
 }
