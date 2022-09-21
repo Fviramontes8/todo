@@ -9,14 +9,6 @@ project(
 	DESCRIPTION "Simple todo application"
 	LANGUAGES CXX)
 
-#find_package(Git REQUIRED)
-#include(FetchContent)
-#FetchContent_Declare(
-#	uuidv4
-#	GIT_REPOSITORY https://github.com/crashoz/uuid_v4.git
-#	GIT_TAG v1.0.0)
-#FetchContent_MakeAvailable(uuidv4)
-
 include_directories(${PROJECT_SOURCE_DIR})
 add_subdirectory(app)
 add_subdirectory(src)
