@@ -7,6 +7,7 @@ add_executable(
 	../src/uid_generator_impl.cpp
 	../src/todo_item_impl.cpp
 	../src/sqlite_database_impl.cpp
+	../src/core_app_impl.cpp
 )
 
 target_link_libraries(${PROJECT_NAME} PUBLIC sqlite3)
