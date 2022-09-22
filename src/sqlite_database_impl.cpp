@@ -85,7 +85,8 @@ namespace fv_todo {
 	void SQLiteDB::execute_sql(
 			const std::string& sql_cmd,
 			int (*callback_fn) (void*, int, char**, char**)) {
-		char* z_err_msg = 0; int conn_res = sqlite3_exec(
+		char* z_err_msg = 0; 
+		int conn_res = sqlite3_exec(
 			_database, 
 			sql_cmd.c_str(),
 			callback_fn, 

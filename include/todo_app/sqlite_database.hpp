@@ -1,3 +1,6 @@
+#ifndef FV_SQLITEDB_HPP
+#define FV_SQLITEDB_HPP
+
 #include <sqlite3.h>
 
 #include "todo_item.hpp"
@@ -119,3 +122,4 @@ namespace fv_todo {
 			void update_task(const ToDoItem& tdi);
 	};
 }
+#endif // FV_SQLITEDB_HPP
