@@ -33,8 +33,7 @@ namespace fv_todo {
 			 */
 			Date();
 
-			/*
-			 * @brief Parameterized constructor that will take a proposed
+			/* @brief Parameterized constructor that will take a proposed
 			 * 	month, day, and year, filter the month and day, then set
 			 * 	those values to the attributes
 			 */
@@ -93,6 +92,13 @@ namespace fv_todo {
 			 * @brief Updates all attributes with the current timestamp
 			 */
 			void update();
+
+			/*
+			 * @brief Returns a string containing all attributes of the class
+			 *
+			 * @return String containing all attributes similar to operator<<
+			 */
+			std::string to_str();
 
 			/*
 			 * @brief Compares all attributes of the Date class if they are
