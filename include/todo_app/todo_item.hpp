@@ -33,6 +33,12 @@ namespace fv_todo {
 			ToDoItem(std::string title);
 
 			/*
+			 * @brief Parameterized constructor that takes an array of strings
+			 * 	and formats it into the attributes of the class
+			 */
+			ToDoItem(char** database_str);
+
+			/*
 			 * @brief Getter for _unique_id attribute
 			 *
 			 * @return String containing pseudo-unique id

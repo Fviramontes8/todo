@@ -10,6 +10,12 @@ namespace fv_todo {
 		_unique_id = generate_uid();
 	}
 
+	ToDoItem::ToDoItem(char** database_str) : 
+			_title{std::string(database_str[1])}, _created_at(), 
+			_completed_at(), _task_status{Status::IN_PROGRESS} {
+		_unique_id = std::stoull(database_str[0], nullptr, 10);
+	}
+
 	unsigned long long ToDoItem::uid() const {
 		return _unique_id;
 	}
