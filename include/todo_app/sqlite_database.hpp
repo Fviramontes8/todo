@@ -9,6 +9,7 @@ namespace fv_todo {
 	class SQLiteDB {
 		private:
 			sqlite3* _database;
+			ToDoItem _temp;
 
 			/*
 			 * @brief Checks if the db/ folder exists, if it does not exist,
@@ -109,6 +110,8 @@ namespace fv_todo {
 			 *
 			 * @param id The Pseudo unique id that will be searched in the
 			 * 	database
+			 *
+			 * @return The task from the database if one exists
 			 */
 			ToDoItem read_task(unsigned long long id);
 

@@ -44,3 +44,16 @@ master branch. After you have pushed your code, you may submit the assignment on
 All the best and happy coding,
 
 The Indica Lab Team
+
+### Addendum
+
+To compile the project (recommended):
+```sh
+cmake -B build
+cmake --build build
+```
+
+To run the project (recommended):
+```sh
+./build/app/todo_app
+```

@@ -9,7 +9,8 @@
 #include "../include/todo_app/todo_item.hpp"
 
 namespace fv_todo {
-	SQLiteDB::SQLiteDB() : _database{nullptr} {
+	SQLiteDB::SQLiteDB() : _database{nullptr}, 
+			_temp{"This is an invalid task"} {
 		check_db_folder();
 		start_db();
 	}
@@ -30,6 +31,8 @@ namespace fv_todo {
 
 	int SQLiteDB::todoitem_callback(void* data,
 			int argc, char** argv, char** col_name) {
+		ToDoItem t{argv};
+		*(ToDoItem*)data = t;
 		return 0;
 	}
 
@@ -90,9 +93,10 @@ namespace fv_todo {
 			_database, 
 			sql_cmd.c_str(),
 			callback_fn, 
-			0, 
+			(void*) &_temp,
 			&z_err_msg
 		);
+
 		if (conn_res != SQLITE_OK) {
 			write_to_db_log(std::string(z_err_msg));
 			sqlite3_free(z_err_msg);
@@ -121,12 +125,18 @@ namespace fv_todo {
 	}
 
 	void SQLiteDB::print_task(unsigned long long id) {
+		ToDoItem task_to_print = read_task(id);
+		std::cout << task_to_print << '\n';
+	}
+
+	ToDoItem SQLiteDB::read_task(unsigned long long id) {
 		std::string sql_begin = "SELECT * FROM TODO WHERE ID=";
 		std::string id_str = std::to_string(id);
 		execute_sql(
 			std::string(sql_begin+id_str).c_str(),
-			print_callback
+			todoitem_callback
 		);
+		return ToDoItem{_temp};
 	}
 
 	void SQLiteDB::delete_task(unsigned long long id) {
