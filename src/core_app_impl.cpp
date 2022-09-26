@@ -65,7 +65,7 @@ namespace fv_todo {
 			"<div class=\"container\">"
 			"<a href=\"/add_task\">"
 			"<button class=\"btn btn-primary btn-lg\">Add another task"
-			"</button> </a> </div>"
+			"</button> <br> </a> </div>"
 	
 			"<div class=\"container\">"
 			"<a href=\"/\">"
