@@ -7,6 +7,13 @@
 #include "sqlite_database.hpp"
 
 namespace fv_todo {
+	// HTML generating functions
+	std::string homepage();
+	std::string add_task_page();
+	std::string add_task_failure();
+	std::string add_task_success();
+
+	// Only CLI relevant
 	void introduction();
 
 	class ToDoApp {
@@ -17,13 +24,16 @@ namespace fv_todo {
 		public:
 			ToDoApp();
 
+			// CLI relevant
 			void prompt() const;
 			void process_user_input();
-
 			void push_task();
 			void print_tasks();
 			void print_task();
 			void pop_task();
+
+			// Webpage relevant
+			void push_task(const std::string &title);
 
 
 			// TODO Later
