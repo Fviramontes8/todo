@@ -10,4 +10,4 @@ add_executable(
 	../src/core_app_impl.cpp
 )
 
-target_link_libraries(${PROJECT_NAME} PUBLIC sqlite3)
+target_link_libraries(${PROJECT_NAME} PUBLIC sqlite3 Crow::Crow)
