@@ -31,8 +31,8 @@ namespace fv_todo {
 
 	int SQLiteDB::todoitem_callback(void* data,
 			int argc, char** argv, char** col_name) {
-		ToDoItem t{argv};
-		*(ToDoItem*)data = t;
+		//ToDoItem t{argv};
+		//*(ToDoItem*)data = t;
 		return 0;
 	}
 

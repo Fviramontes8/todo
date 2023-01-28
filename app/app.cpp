@@ -1,13 +1,18 @@
 #include <iostream>
 #include <filesystem>
-#include <sstream>
+#include <string>
+
 #include "crow.h"
 
 #include "../include/todo_app/core_app.hpp"
 
 int main() {
-	 fv_todo::ToDoApp todo_app;
-	 // CLI code:
+	std::string project_name{CMAKE_PROJECT_HOME};
+	crow::mustache::set_global_base(project_name+"/html");
+//	std::cout << '\'' << project_name << '\'' << '\n';
+//	std::cout << '\'' << std::string{project_name+"/html/add_task_page.html"} << "\'\n";
+	fv_todo::ToDoApp todo_app;
+//	CLI code:
 //	 while(1) {
 //	 	todo_app.prompt();
 //	 	todo_app.process_user_input();
@@ -16,13 +21,19 @@ int main() {
 	crow::SimpleApp app;
 	CROW_ROUTE(app, "/")(
 		[]() {
-			return fv_todo::homepage();
+			fv_todo::Date today;
+			auto page = crow::mustache::load("index.html");
+			crow::mustache::context ctx({{"today", today.to_str()}});
+			return page.render(ctx);
+			//return fv_todo::homepage();
 		}
 	);
 
 	CROW_ROUTE(app, "/add_task")(
 		[]() {
-			return fv_todo::add_task_page();
+			return crow::mustache::load_text(
+				std::string{"add_task_page.html"}
+			);
 		}
 	);
 
@@ -32,9 +43,13 @@ int main() {
 				std::string title{req.url_params.get("title")};
 				todo_app.push_task(title);
 				todo_app.print_tasks();
-				return fv_todo::add_task_success();
+				return crow::mustache::load_text(
+					std::string{"add_task_success.html"}
+				);
 			}
-			return fv_todo::add_task_failure();
+			return crow::mustache::load_text(
+				std::string{"add_task_failure.html"}
+			);
 		}
 	);
 

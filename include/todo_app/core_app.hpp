@@ -7,15 +7,10 @@
 #include "sqlite_database.hpp"
 
 namespace fv_todo {
-	// HTML generating functions
-	std::string homepage();
-	std::string add_task_page();
-	std::string add_task_failure();
-	std::string add_task_success();
-
 	// Only CLI relevant
 	void introduction();
 
+	// Main class
 	class ToDoApp {
 		private:
 			int _user_input;
