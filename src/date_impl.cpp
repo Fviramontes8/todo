@@ -98,7 +98,7 @@ namespace fv_todo {
 
 	std::string Date::to_str() {
 		std::ostringstream date_str;
-		date_str << _day << '/' << _month << '/' << _year;
+		date_str << _month << '/' << _day << '/' << _year;
 		return date_str.str();
 	}
 
