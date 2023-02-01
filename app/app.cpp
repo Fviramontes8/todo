@@ -53,6 +53,14 @@ int main() {
 		}
 	);
 
+	CROW_ROUTE(app, "/style.css")(
+		[]() {
+			return crow::mustache::load_text(
+				std::string{"style.css"}
+			);
+		}
+	);
+
 	app.port(8080).multithreaded().run();
 
 	return 0;
