@@ -1,20 +1,27 @@
-<!DOCTYPE>
+<!DOCTYPE html>
 <html lang=="en">
-	<body> 
-		<center>
-			<div class=container>
-				<form action=/adding_task>
-					<label for=title>Title name:</label> <br>
-					<input type=text id=title name=title> <br>
-					<input type=submit value=Submit> <br>
-				</form>
-			</div>
-			<div class=container>
-				<a href=/>
-					<button class=btn btn-primary btn-lg>Return home
-					</button>
-				</a>
-			</div>
-		</center>
-	</body>
+<head>
+	<meta charset="utf-8">
+	<title>
+		Submit a Task!
+	</title>
+</head>
+<body> 
+	<center>
+		<div class=container>
+			<form action=/adding_task>
+				<label for=title>Title name:</label> <br>
+				<input type="text" id=title name="title" title="Task title"
+					required placeholder="Task title" pattern="^[a-zA-Z\s]*$"> <br>
+				<input type="submit" value=Submit> <br>
+			</form>
+		</div>
+		<div class=container>
+			<a href=/>
+				<button class=btn btn-primary btn-lg>Return home
+				</button>
+			</a>
+		</div>
+	</center>
+</body>
 </html>
