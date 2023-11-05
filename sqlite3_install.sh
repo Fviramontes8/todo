@@ -5,4 +5,4 @@ cd sqlite-autoconf-3390300/
 ./configure --prefix=/usr/local
 make
 make install
-rm -rf sqlite-autoconf-3390300*
+sudo rm -rf sqlite-autoconf-3390300*
